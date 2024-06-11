@@ -8,10 +8,7 @@ import {
 } from "@/components/ui/resizable";
 import { cn } from "@/lib/utils";
 import { Sidebar } from "../sidebar";
-import { useChat } from "ai/react";
 import Chat, { ChatProps } from "./chat";
-import ChatList from "./chat-list";
-import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 
 interface ChatLayoutProps {
   defaultLayout: number[] | undefined;
@@ -35,8 +32,7 @@ export function ChatLayout({
   error,
   stop,
   chatId,
-}: // setSelectedModel,
-MergedProps) {
+}: MergedProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed);
   const [isMobile, setIsMobile] = useState(false);
 

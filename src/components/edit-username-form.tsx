@@ -16,8 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import React, { useEffect, useState } from "react";
 import { ModeToggle } from "./mode-toggle";
-import { toast } from "sonner"
-
+import { toast } from "sonner";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -39,7 +38,7 @@ export default function EditUsernameForm({ setOpen }: EditUsernameFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      username: localStorage.getItem("ollama_user") || "",
     },
   });
 
@@ -47,6 +46,7 @@ export default function EditUsernameForm({ setOpen }: EditUsernameFormProps) {
     localStorage.setItem("ollama_user", values.username);
     window.dispatchEvent(new Event("storage"));
     toast.success("Name updated successfully");
+    setOpen(false);
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,10 +57,10 @@ export default function EditUsernameForm({ setOpen }: EditUsernameFormProps) {
 
   return (
     <Form {...form}>
-       <div className="w-full flex flex-col gap-4 pt-8">
-       <FormLabel>Theme</FormLabel>
+      <div className="w-full flex flex-col gap-4 pt-8">
+        <FormLabel>Theme</FormLabel>
         <ModeToggle />
-       </div>
+      </div>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
@@ -73,12 +73,10 @@ export default function EditUsernameForm({ setOpen }: EditUsernameFormProps) {
                   <Input
                     {...field}
                     type="text"
-                    value={name}
-                    onChange={(e) => handleChange(e)}
+                    // value={name}
+                    // onChange={(e) => handleChange(e)}
                   />
-                  <Button type="submit">
-                    Change name
-                  </Button>
+                  <Button type="submit">Change name</Button>
                 </div>
               </FormControl>
               <FormMessage />

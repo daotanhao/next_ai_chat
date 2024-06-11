@@ -1,15 +1,11 @@
 import React, { useState } from "react";
-import ChatTopbar from "./chat-topbar";
 import ChatList from "./chat-list";
 import ChatBottombar from "./chat-bottombar";
 import { Message, useChat } from "ai/react";
-import { v4 as uuidv4 } from "uuid";
-import { set } from "zod";
 import { ChatRequestOptions } from "ai";
 
 export interface ChatProps {
   chatId?: string;
-  // setSelectedModel: React.Dispatch<React.SetStateAction<string>>;
   messages: Message[];
   input: string;
   handleInputChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
@@ -31,7 +27,6 @@ export default function Chat({
   isLoading,
   error,
   stop,
-  // setSelectedModel,
   chatId,
   loadingSubmit,
 }: ChatProps) {
@@ -40,11 +35,7 @@ export default function Chat({
 
   return (
     <div className="flex flex-col justify-between w-full h-full  ">
-      {/* <ChatTopbar setSelectedModel={setSelectedModel} isLoading={isLoading}
-        chatId={chatId} messages={messages} /> */}
-
       <ChatList
-        // setSelectedModel={setSelectedModel}
         messages={messages}
         input={input}
         handleInputChange={handleInputChange}
@@ -56,7 +47,6 @@ export default function Chat({
       />
 
       <ChatBottombar
-        // setSelectedModel={setSelectedModel}
         messages={messages}
         input={input}
         handleInputChange={handleInputChange}

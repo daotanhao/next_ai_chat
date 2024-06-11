@@ -90,10 +90,7 @@ export default function UserSettings() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-48 p-2">
-        {/* <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-            <PullModel />
-          </DropdownMenuItem> */}
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger className="w-full">
             <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
               <div className="flex w-full gap-2 p-1 items-center cursor-pointer">
@@ -109,7 +106,6 @@ export default function UserSettings() {
             </DialogHeader>
           </DialogContent>
         </Dialog>
-        <Dialog></Dialog>
       </DropdownMenuContent>
     </DropdownMenu>
   );

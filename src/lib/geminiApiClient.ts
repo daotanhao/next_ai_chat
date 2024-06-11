@@ -1,4 +1,3 @@
-
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 class GeminiApiClient {
@@ -8,15 +7,18 @@ class GeminiApiClient {
     this.genAI = new GoogleGenerativeAI(apiKey);
   }
 
-  async generateContent(prompt: string, modelId: string = "gemini-pro"): Promise<string> {
+  async generateContent(
+    prompt: string,
+    modelId: string = "gemini-1.5-flash"
+  ): Promise<string> {
     try {
       const model = this.genAI.getGenerativeModel({ model: modelId });
       const result = await model.generateContent(prompt);
       const response = await result.response;
       return response.text();
     } catch (error) {
-      console.error('Error calling Gemini API:', error);
-      throw new Error('Failed to generate content with Gemini API');
+      console.error("Error calling Gemini API:", error);
+      throw new Error("Failed to generate content with Gemini API");
     }
   }
 }

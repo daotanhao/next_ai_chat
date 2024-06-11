@@ -1,12 +1,11 @@
 import { Message, useChat } from "ai/react";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ChatProps } from "./chat";
 import Image from "next/image";
 import CodeDisplayBlock from "../code-display-block";
-import { experimental_AssistantResponse } from "ai";
 import { marked } from "marked";
 
 export default function ChatList({

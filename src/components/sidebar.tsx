@@ -12,9 +12,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import UserSettings from "./user-settings";
 import { useLocalStorageData } from "@/app/hooks/useLocalStorageData";
 import { ScrollArea, Scrollbar } from "@radix-ui/react-scroll-area";
-import PullModel from "./pull-model";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -46,19 +46,18 @@ export function Sidebar({
   const [localChats, setLocalChats] = useState<
     { chatId: string; messages: Message[] }[]
   >([]);
-  const localChatss = useLocalStorageData("chat_", []);
-  const [selectedChatId, setSselectedChatId] = useState<string | null>(null);
+  const [selectedChatId, setSelectedChatId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
     if (chatId) {
-      setSselectedChatId(chatId);
+      setSelectedChatId(chatId);
     }
 
-    setLocalChats(getLocalstorageChats());
+    setLocalChats(getLocalStorageChats());
     const handleStorageChange = () => {
-      setLocalChats(getLocalstorageChats());
+      setLocalChats(getLocalStorageChats());
     };
     window.addEventListener("storage", handleStorageChange);
     return () => {
@@ -66,7 +65,7 @@ export function Sidebar({
     };
   }, []);
 
-  const getLocalstorageChats = (): {
+  const getLocalStorageChats = (): {
     chatId: string;
     messages: Message[];
   }[] => {
@@ -99,7 +98,7 @@ export function Sidebar({
 
   const handleDeleteChat = (chatId: string) => {
     localStorage.removeItem(chatId);
-    setLocalChats(getLocalstorageChats());
+    setLocalChats(getLocalStorageChats());
   };
 
   return (
@@ -185,7 +184,9 @@ export function Sidebar({
                               action cannot be undone.
                             </DialogDescription>
                             <div className="flex justify-end gap-2">
-                              <Button variant="outline">Cancel</Button>
+                              <DialogClose>
+                                <Button variant="outline">Cancel</Button>
+                              </DialogClose>
                               <Button
                                 variant="destructive"
                                 onClick={() => handleDeleteChat(chatId)}

@@ -8,7 +8,7 @@ import { PaperPlaneIcon, StopIcon } from "@radix-ui/react-icons";
 import { v4 as uuidv4 } from "uuid";
 
 // Assume Gamma is properly imported, adjust path as necessary
-import Gamma from '../../lib/gamma';
+import Gamma from "../../lib/gamma";
 
 export default function ChatBottombar({
   messages,
@@ -18,11 +18,11 @@ export default function ChatBottombar({
   isLoading,
   error,
   stop,
-}: ChatProps ) {
-  
+}: ChatProps) {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
+      if (!input) return;
       handleSubmit(e as unknown as React.FormEvent<HTMLFormElement>);
     }
   };
